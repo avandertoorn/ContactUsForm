@@ -1,5 +1,5 @@
 ﻿using System.Text.Json;
-using API.Domain;
+using API.Contracts.Data;
 
 namespace API.Repositories;
 
@@ -15,34 +15,34 @@ public sealed class ContactMessageRepository : IContactMessageRepository
         }
     }
 
-    public async Task<bool> CreateAsync(ContactMessage contactMessage)
+    public async Task<bool> CreateAsync(ContactMessageDto contactMessage)
     {
         var jsonObjects = await GetContactMessagesFromFileAsync();
         jsonObjects.Add(contactMessage);
         return await WriteContactMessagesToFileAsync(jsonObjects);
     }
 
-    public async Task<ContactMessage?> GetAsync(Guid id)
+    public async Task<ContactMessageDto?> GetAsync(Guid id)
     {
         var messages = await GetContactMessagesFromFileAsync();
-        return messages.FirstOrDefault(x => x.Id.Value == id);
+        return messages.FirstOrDefault(x => x.Id == id);
     }
     
-    private async Task<List<ContactMessage>> GetContactMessagesFromFileAsync()
+    private async Task<List<ContactMessageDto>> GetContactMessagesFromFileAsync()
     {
         try
         {
             var jsonString = await File.ReadAllTextAsync(_filePath);
-            var jsonObjects = JsonSerializer.Deserialize<List<ContactMessage>>(jsonString) ?? new List<ContactMessage>();
+            var jsonObjects = JsonSerializer.Deserialize<List<ContactMessageDto>>(jsonString) ?? new List<ContactMessageDto>();
             return jsonObjects;
         }
-        catch(Exception e)
+        catch(Exception)
         {
-            return new List<ContactMessage>();
+            return new List<ContactMessageDto>();
         }
     }
     
-    private async Task<bool> WriteContactMessagesToFileAsync(List<ContactMessage> contactMessages)
+    private async Task<bool> WriteContactMessagesToFileAsync(List<ContactMessageDto> contactMessages)
     {
         try
         {
@@ -50,7 +50,7 @@ public sealed class ContactMessageRepository : IContactMessageRepository
             await File.WriteAllTextAsync(_filePath, newJsonString);
             return true;
         }
-        catch(Exception e)
+        catch(Exception)
         {
             return false;
         }

@@ -1,4 +1,5 @@
 ﻿using API.Domain;
+using API.Mapping;
 using API.Repositories;
 using FluentValidation;
 using FluentValidation.Results;
@@ -27,6 +28,16 @@ public sealed class ContactMessageService : IContactMessageService
             });
         }
         
-        return await _repository.CreateAsync(contactMessageMessage);
+        var result = await _repository.CreateAsync(contactMessageMessage.ToContactMessageDto());
+        if(!result)
+        {
+            var message = $"Failed to create contact message with id {contactMessageMessage.Id}";
+            throw new ValidationException(message, new []
+            {
+                new ValidationFailure(nameof(ContactMessage), message)
+            });
+        }
+        
+        return result;
     }
 }
