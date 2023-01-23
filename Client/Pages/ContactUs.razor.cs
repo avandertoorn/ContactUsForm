@@ -5,6 +5,7 @@ using Client.Services;
 using Microsoft.AspNetCore.Components;
 using Shared.Contracts.Data;
 using Shared.Contracts.Requests;
+using Client.Models;
 
 namespace Client.Pages;
 
@@ -36,21 +37,4 @@ public partial class ContactUs
             Message = "There was an error sending your message. Please try again later.";
         }
     }
-}
-
-public class ContactMessage
-{
-    [Required]
-    [MinLength(1)]
-    public string FirstName { get; set; }
-    [Required]
-    [MinLength(1)]
-    public string LastName { get; set; }
-    [Required]
-    [EmailAddress]
-    public string Email { get; set; }
-    [Required]
-    [MinLength(20, ErrorMessage = "Message cannot be shorter than 20 characters")]
-    [MaxLength(500, ErrorMessage = "Message cannot be longer than 500 characters")]
-    public string Message { get; set; }
 }

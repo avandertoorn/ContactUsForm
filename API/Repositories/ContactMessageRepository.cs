@@ -28,6 +28,24 @@ public sealed class ContactMessageRepository : IContactMessageRepository
         return messages.FirstOrDefault(x => x.Id == id);
     }
     
+    public async Task<IEnumerable<ContactMessageDto>> GetAllAsync()
+    {
+        return await GetContactMessagesFromFileAsync();
+    }
+
+    public async Task<bool> DeleteAsync(Guid id)
+    {
+        var messages = await GetContactMessagesFromFileAsync();
+        var message = messages.FirstOrDefault(x => x.Id == id);
+        if (message is null)
+        {
+            return false;
+        }
+        
+        messages.Remove(message);
+        return await WriteContactMessagesToFileAsync(messages);
+    }
+
     private async Task<List<ContactMessageDto>> GetContactMessagesFromFileAsync()
     {
         try

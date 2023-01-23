@@ -40,4 +40,19 @@ public sealed class ContactMessageService : IContactMessageService
         
         return result;
     }
+
+    public async Task<ContactMessage?> GetAsync(Guid id)
+    {
+        return await _repository.GetAsync(id).ContinueWith(task => task.Result?.ToContactMessage());
+    }
+
+    public async Task<IEnumerable<ContactMessage>> GetAllAsync()
+    {
+        return await _repository.GetAllAsync().ContinueWith(task => task.Result.Select(x => x.ToContactMessage()));
+    }
+
+    public async Task<bool> DeleteAsync(Guid id)
+    {
+        return await _repository.DeleteAsync(id);
+    }
 }
