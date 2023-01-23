@@ -1,4 +1,4 @@
-﻿namespace API.Contracts.Data;
+﻿namespace Shared.Contracts.Data;
 
 public class ContactMessageDto
 {

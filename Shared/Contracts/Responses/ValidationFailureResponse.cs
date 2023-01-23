@@ -1,4 +1,4 @@
-﻿namespace API.Contracts.Responses;
+﻿namespace Shared.Contracts.Responses;
 
 public sealed class ValidationFailureResponse
 {

@@ -1,4 +1,4 @@
-﻿namespace API.Contracts.Requests;
+﻿namespace Shared.Contracts.Requests;
 
 public sealed class CreateContactMessageRequest
 {
