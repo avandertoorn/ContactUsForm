@@ -1,6 +1,6 @@
-﻿using API.Contracts.Requests;
-using API.Domain;
+﻿using API.Domain;
 using API.Domain.Common;
+using Shared.Contracts.Requests;
 
 namespace API.Mapping;
 

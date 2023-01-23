@@ -1,5 +1,5 @@
-﻿using API.Contracts.Requests;
-using FluentValidation;
+﻿using FluentValidation;
+using Shared.Contracts.Requests;
 
 namespace API.Validation;
 

@@ -1,5 +1,5 @@
 ﻿using System.Text.Json;
-using API.Contracts.Data;
+using Shared.Contracts.Data;
 
 namespace API.Repositories;
 

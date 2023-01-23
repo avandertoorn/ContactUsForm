@@ -1,8 +1,8 @@
-﻿using API.Contracts.Requests;
-using API.Mapping;
+﻿using API.Mapping;
 using API.Services;
 using FastEndpoints;
 using Microsoft.AspNetCore.Authorization;
+using Shared.Contracts.Requests;
 
 namespace API.Endpoints;
 

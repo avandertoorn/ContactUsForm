@@ -1,6 +1,6 @@
 ﻿using System.Net;
-using API.Contracts.Responses;
 using FluentValidation;
+using Shared.Contracts.Responses;
 
 namespace API.Validation;
 

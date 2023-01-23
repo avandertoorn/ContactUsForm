@@ -16,17 +16,17 @@ public class Message : ValueOf<string, Message>
                 new ValidationFailure(nameof(Message), message)
             });
         }
-        if (Value.Length > 1000)
+        if (Value.Length > 500)
         {
-            var message = "Message cannot be longer than 1000 characters";
+            var message = "Message cannot be longer than 500 characters";
             throw new ValidationException(message, new[]
             {
                 new ValidationFailure(nameof(Message), message)
             });
         }
-        if(Value.Length < 1)
+        if(Value.Length < 20)
         {
-            var message = "Message cannot be empty";
+            var message = "Message must be at least 20 characters";
             throw new ValidationException(message, new[]
             {
                 new ValidationFailure(nameof(Message), message)

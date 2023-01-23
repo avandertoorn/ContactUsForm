@@ -1,6 +1,6 @@
-﻿using API.Contracts.Data;
-using API.Domain;
+﻿using API.Domain;
 using API.Domain.Common;
+using Shared.Contracts.Data;
 
 namespace API.Mapping;
 
