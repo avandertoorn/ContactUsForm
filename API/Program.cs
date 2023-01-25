@@ -16,7 +16,8 @@ builder.Services.AddSwaggerDoc();
 
 builder.Services.AddSingleton<IContactMessageRepository, ContactMessageRepository>();
 builder.Services.AddSingleton<IContactMessageService, ContactMessageService>();
-builder.Services.AddSingleton<IDbConnectionProvider, DbConnectionProvider>();
+builder.Services.AddSingleton<IDbConnectionProvider>(_ => 
+    new DbConnectionProvider(Path.Combine(Environment.CurrentDirectory, "ContactMessages.json")));
 
 builder.Services.AddSwaggerGen();
 

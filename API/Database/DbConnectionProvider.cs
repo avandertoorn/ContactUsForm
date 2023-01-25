@@ -2,5 +2,9 @@
 
 public class DbConnectionProvider : IDbConnectionProvider
 {
-    public string FilePath { get; } = Path.Combine(Environment.CurrentDirectory, "ContactMessages.json");
+    public DbConnectionProvider(string filePath)
+    {
+        FilePath = filePath;
+    }
+    public string FilePath { get; } 
 }

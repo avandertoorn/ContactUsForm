@@ -6,11 +6,12 @@ using Shared.Contracts.Requests;
 
 namespace API.Tests.Integration.Endpoints;
 
-public class CreateContactMessageEndpointTests : IClassFixture<WebApplicationFactory<IApiMarker>>
+[Collection("Database tests")]
+public class CreateContactMessageEndpointTests : IClassFixture<ApiFactory>
 {
     private readonly HttpClient _httpClient;
 
-    public CreateContactMessageEndpointTests(WebApplicationFactory<IApiMarker> appFactory)
+    public CreateContactMessageEndpointTests(ApiFactory appFactory)
     {
         _httpClient = appFactory.CreateClient();
     }
