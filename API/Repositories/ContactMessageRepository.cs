@@ -1,17 +1,19 @@
 ﻿using System.Text.Json;
+using API.Database;
 using Shared.Contracts.Data;
 
 namespace API.Repositories;
 
 public sealed class ContactMessageRepository : IContactMessageRepository
 {
-    private readonly string _filePath = Path.Combine(Environment.CurrentDirectory, "ContactMessages.json");
+    private readonly IDbConnectionProvider _dbConnectionProvider;
 
-    public ContactMessageRepository()
+    public ContactMessageRepository(IDbConnectionProvider dbConnectionProvider)
     {
-        if (!File.Exists(_filePath))
+        _dbConnectionProvider = dbConnectionProvider;
+        if (!File.Exists(_dbConnectionProvider.FilePath))
         {
-            File.Create(_filePath).Close();
+            File.Create(_dbConnectionProvider.FilePath).Close();
         }
     }
 
@@ -50,7 +52,7 @@ public sealed class ContactMessageRepository : IContactMessageRepository
     {
         try
         {
-            var jsonString = await File.ReadAllTextAsync(_filePath);
+            var jsonString = await File.ReadAllTextAsync(_dbConnectionProvider.FilePath);
             var jsonObjects = JsonSerializer.Deserialize<List<ContactMessageDto>>(jsonString) ?? new List<ContactMessageDto>();
             return jsonObjects;
         }
@@ -65,7 +67,7 @@ public sealed class ContactMessageRepository : IContactMessageRepository
         try
         {
             var newJsonString = JsonSerializer.Serialize(contactMessages);
-            await File.WriteAllTextAsync(_filePath, newJsonString);
+            await File.WriteAllTextAsync(_dbConnectionProvider.FilePath, newJsonString);
             return true;
         }
         catch(Exception)

@@ -1,3 +1,4 @@
+using API.Database;
 using API.Repositories;
 using API.Services;
 using API.Validation;
@@ -15,6 +16,7 @@ builder.Services.AddSwaggerDoc();
 
 builder.Services.AddSingleton<IContactMessageRepository, ContactMessageRepository>();
 builder.Services.AddSingleton<IContactMessageService, ContactMessageService>();
+builder.Services.AddSingleton<IDbConnectionProvider, DbConnectionProvider>();
 
 builder.Services.AddSwaggerGen();
 
