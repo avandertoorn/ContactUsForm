@@ -7,9 +7,11 @@ public class ContactMessage
 {
     [Required]
     [MinLength(1)]
+    [MaxLength(50)]
     public string FirstName { get; set; }
     [Required]
     [MinLength(1)]
+    [MaxLength(50)]
     public string LastName { get; set; }
     [Required]
     [EmailAddress]
