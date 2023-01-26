@@ -12,9 +12,16 @@ public class LastName : ValueOf<string, LastName>
     
     protected override void Validate()
     {
+        var message = $"{Value} is not a valid last name";
+        if (Value is null)
+        {
+            throw new ValidationException(message, new[]
+            {
+                new ValidationFailure(nameof(LastName), message)
+            });
+        }
         if(!NameRegex.IsMatch(Value))
         {
-            var message = $"{Value} is not a valid last name";
             throw new ValidationException(message, new []
             {
                 new ValidationFailure(nameof(LastName), message)
